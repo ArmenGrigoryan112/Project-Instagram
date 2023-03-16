@@ -19,6 +19,8 @@ Features
 
 -Log out: By clicking on the "switch" key on the main page the account you are currently using will be logged out and you can enter as a different user.
 
+These are only the features that seen by the users, thus the code behind all of this would be much more interesting to view))
+
 KNOWN BUGS
 
 As of March 17th, 2023, the following bugs are present in the project:
