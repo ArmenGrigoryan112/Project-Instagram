@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 function Suggestion({id, name, avatar}) {
   return (
     <>
-      <NavLink to={`${id}/uniq`} style={{textDecoration:'none'}} className="profile-card">
+      <NavLink style={{textDecoration:'none'}} className="profile-card">
         <div className="profile-pic">
             <img src={avatar} alt=""/>
         </div>

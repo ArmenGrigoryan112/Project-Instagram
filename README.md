@@ -1,31 +1,70 @@
-Instagram Project
+# Getting Started with Create React App
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project is a replica of Instagram that uses the JsonPlaceholder website to access the users, posts, pictures and information that would otherwise be accessed from a real server.
+## Available Scripts
 
-Features
--JsonPlaceholder: All the users, posts, pictures and information that otherwise would be accessed from a real server was requested from the jsonplaceholder website, to imitate a real server.
+In the project directory, you can run:
 
--Messenger: This code includes fully functioning messenger, where you can write messages to the users from the above mentioned server. Not only are you able to write messages to any of the given accounts, but also the messages are saved for the both accounts, so if you log out of the current account and log in into the one to whom the message was intended to, you will find that the conversation stated the same for both.
+### `npm start`
 
--Log in: You have the option to log in as 10 pre-registered users from https://jsonplaceholder.typicode.com/users , where the username is the account username and the password is the city of the given user, for example Bret Gwenborough respectively.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
--Commenting: Under each post you may add a comment, which will be under the name of the account you are currently logged in.
--Creating posts: You may add posts by using a link of an image and a description. The post will be added both in the profile and the main page.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
--Profile page: The profile page not only has the username you are currently logged in, but also all the posts, like, comment and followers count which are all made up of randomized numbers. The posts count calculate the exact number of posts in the profile page. Each post can be deleted with by clicking on the red cross on top of the post in the profile page.
+### `npm test`
 
--Search bar: The search bar is made to find users by writing key-words and letters.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
--Log out: By clicking on the "switch" key on the main page the account you are currently using will be logged out and you can enter as a different user.
+### `npm run build`
 
-These are only the features seen by the users, thus the code behind all of this would be much more interesting to view))
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-KNOWN BUGS
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-As of March 17th, 2023, the following bugs are present in the project:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-1. Messenger's UI has a problem with input being dragged down as the messages become more in the chat.
-2. The project is not optimized with such important hooks as memo and useCallBack, which makes the website unnecessarily re-render.
-3. Log in page needs some cosmetic fixes to look more like the real Instagram log in page.
-4. A HOC should be written for the comments section, so that the user would be able to see more/less of the comments on the given post.
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

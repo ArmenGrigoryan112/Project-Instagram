@@ -30,3 +30,6 @@
 	color: gray;
 	margin-top: 5px;
 }
+.Messenger-left-col-people-message{
+	cursor: pointer;
+}

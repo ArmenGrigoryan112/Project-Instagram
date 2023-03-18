@@ -1,29 +1,18 @@
 
-export const addPost = ({dispatch}) => (next) => (action) => {
+export const addPost = ({dispatch}) => next => action => {
     if (action.type === 'addPost') {
-        const {name, postsText, img} = action.payload 
+        const {name,img,postText} = action.payload
         const post = {
-            id: new Date().getTime().toString() + '_' + name,
-            name, postsText, img,
+            id: new Date().getTime().toString() + "_"+ name,
+            name,postText,img,
             likesCount: Math.round(Math.random() * 200 + 300),
-            timeAgo: Math.round(Math.random() * 8 + 3) + ' Minutes ago',
-            comments: []
+            timeAgo: Math.round(Math.random() * 8 + 2) + ' Minutes ago',
+            comments:[]
         }
-        
-
-        dispatch({type: 'post/addPost', payload: post})
-        dispatch({type: 'users/addPost', payload: post})
+        dispatch({type:'posts/addPost', payload:post})
+        dispatch({type:'users/addPost', payload: post})
 
         return
-    }
-    next(action)
-}
-
-export const deletePost = ({ dispatch }) => (next) => (action) => {
-    if (action.type === 'deletePost') {
-        dispatch({type: 'post/deletePost', payload: action.payload})
-        dispatch({type: 'users/deletePost', payload: action.payload})
-        return 
     }
     next(action)
 }

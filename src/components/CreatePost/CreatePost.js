@@ -1,19 +1,18 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import IMAGES from '../../images';
-import { selectUsers } from '../../store/slice/users/usersSlice';
+import { selectUsers } from '../../store/slices/users/usersSlice';
 import './CreatePost.css'
 const CreatePost = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {currentUser} = useSelector(selectUsers)
     const formRef = useRef(null)
-    const handleSubmit = (e) => {
+    const {currentUser} = useSelector(selectUsers)
+    const handleSubmit = (e)=> {
         e.preventDefault()
-        const [{ value: img }, { value: postsText }] = formRef.current
-        console.log(img, postsText);
-        dispatch({type: 'addPost', payload: {img, postsText, name: currentUser.username}})
+        const [{value: img}, {value:postText}] = formRef.current
+        dispatch({type:'addPost', payload:{img,postText,name:currentUser.username}})
         formRef.current.reset()
         navigate('/')
     }
@@ -24,12 +23,12 @@ const CreatePost = () => {
             <br/>
             <img style={{margin:'auto'}} width='100px' src={IMAGES.createPost} alt="" />   
             <br/>
-            <form style={{marginTop: '50px'}} ref={formRef} onSubmit={handleSubmit}>
-                <input type="text" placeholder='img' /><br/><br/>
-                <input type="text" placeholder='description' /><br/><br/>
-                <label class="input-file">
-                    <input type="submit" style={{display: 'none'}} name="file"/>		
-                    <span>Выберите файл</span>
+            <form style={{marginTop: '50px'}} ref={formRef} onSubmit={handleSubmit} >
+                <input className='login-input' placeholder='Add Image' /><br/><br/>
+                <input className='login-input' placeholder='Add Description' /><br/><br/>
+                <label className="input-file">
+                    <input type="submit" style={{display:'none'}} name="file"/>		
+                    <span>Add File</span>
                 </label>
             </form>
         </div>

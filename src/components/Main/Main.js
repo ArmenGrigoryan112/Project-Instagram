@@ -1,47 +1,42 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import IMAGES from '../../images'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOutMess } from '../../store/slices/conversations/conversationsSlice'
+import { logOut, selectUsers } from '../../store/slices/users/usersSlice'
 import Posts from '../Posts/Posts'
 import Stories from '../Stories/Stories'
 import Suggestions from '../Suggestions/Suggestions'
-import {useDispatch, useSelector} from "react-redux";
-import {logout, selectUsers} from "../../store/slice/users/usersSlice";
-import {logOutMess} from "../../store/slice/message/messageSlice";
 
 function Main() {
-    const dispatch = useDispatch()
     const {currentUser} = useSelector(selectUsers)
-     const logoutFuc = () => {
-         dispatch(logout())
-         dispatch(logOutMess())
-     }
-
-    return (
-        <section className="main">
-            <div className="wrapper">
-                <div className="left-col">
-                    <Stories/>
-                    <Posts/>
-                </div>
-                <div className="right-col">
-                <span className="profile-card">
+    const dispatch = useDispatch()
+    const logout = () => {
+        dispatch(logOut())
+        dispatch(logOutMess())
+    }
+  return (
+    <section className="main">
+        <div className="wrapper">
+            <div className="left-col">
+                <Stories/>
+                <Posts />
+            </div>
+            <div className="right-col">
+                <span  className="profile-card">
                     <div className="profile-pic">
-                        <NavLink to='/profile'>
-                           <img src={currentUser?.avatar} alt=""/>
-                        </NavLink>
+                        <img src={currentUser?.avatar} alt=""/>
                     </div>
                     <div>
                         <p className="username">{currentUser?.username}</p>
                         <p className="sub-text">{currentUser?.name}</p>
                     </div>
-                    <button className="action-btn" onClick={logoutFuc}>switch</button>
+                    <button className="action-btn" onClick={logout}>switch</button>
                 </span>
-                    <p className="suggestion-text">Suggestions for you</p>
-                    <Suggestions/>
-                </div>
+                <p className="suggestion-text">Suggestions for you</p> 
+                 <Suggestions />
             </div>
-        </section>
-    )
+        </div>
+    </section>
+  )
 }
 
 export default Main

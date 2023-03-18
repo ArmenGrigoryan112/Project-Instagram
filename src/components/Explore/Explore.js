@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux'
+import { selectUsers } from '../../store/slices/users/usersSlice'
 import ExploreItem from '../ExploreItem/ExploreItem'
 import './Explore.css'
 
 function Explore() {
-	const image = useSelector(state => state.users)
-	console.log(image)
+	const {usersData} = useSelector(selectUsers)
+	
   return (
 	 <div className='container Explore'>
 		<div className='gallery'>
 			{
-				image.map(el => <ExploreItem key={el.id} img={el.avatar} likes={el.likes} commentsCount={el.commentsCount} />)
+				usersData.map(el => <ExploreItem key={el.id} img={el.avatar} following={el.following} followers={el.followers}/>)
 			}
+			
 		</div>
 	 </div>
   )

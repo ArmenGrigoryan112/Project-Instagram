@@ -1,33 +1,22 @@
-import React, {useRef} from 'react'
+import { memo } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import showComments from '../../HOC/showComments'
 import IMAGES from '../../images'
-import PostComment from "../PostComment/PostComment";
-import {useDispatch, useSelector} from "react-redux";
-import {addComment} from "../../store/slice/post/postSlice";
-import {selectUsers} from "../../store/slice/users/usersSlice";
+import { selectUsers } from '../../store/slices/users/usersSlice'
+import Comments from '../Comments/Comments'
+import Form from '../Form/Form'
 
-function Post({id, comments, img, name, likesCount, postsText, timeAgo}) {
-  const formRef = useRef(null)
-    const {currentUser} = useSelector(selectUsers)
-    const dispatch = useDispatch();
-    const  handleSubmit = (e) => {
-      e.preventDefault()
 
-        const  [{value:body}] = formRef.current
-        if (body.length) {
-        dispatch(addComment({
-            id,body,
-            userName: currentUser?.username
-        }))
-        formRef.current.reset()
-    }
-    }
 
-    return (
+function Post({id, img, name, likesCount,comments, postText, timeAgo, show, toggleShow}) {
+const {currentUser} = useSelector(selectUsers)
+
+  return (
     <div className="post">
         <div className="info">
             <NavLink style={{textDecoration: 'none'}} to={`${id}/uniq`} className="user">
-                    <div className="profile-pic"><img src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`} alt="" /></div>
+                <div className="profile-pic"><img src={currentUser?.avatar} alt="" /></div>
                 <p className="username">{name}</p>
             </NavLink>
             <img src={IMAGES.option} className="options" alt=""/>
@@ -36,22 +25,25 @@ function Post({id, comments, img, name, likesCount, postsText, timeAgo}) {
         <div className="post-content">
             <div className="reaction-wrapper">
                 <img src={IMAGES.like} className="icon" alt=""/>
-                <img src={IMAGES.comment} className="icon" alt=""/>
+                <img onClick={toggleShow} src={IMAGES.comment} className="icon" alt=""/>
                 <img src={IMAGES.send} className="icon" alt=""/>
                 <img src={IMAGES.save} className="save icon" alt=""/>
             </div>
             <p className="likes">{likesCount}</p>
-            {!!postsText.trim().length && <p className="description"><span>{name} </span> {postsText}</p>}
-            <p className="post-time">{timeAgo}</p>
-            <PostComment {...{comments}}/>
+          {!!postText.trim().length && <p className="description"><span>{name} </span> {postText}</p>}
+            <p className="post-time">{timeAgo}</p> <br/>
+            <p onClick={toggleShow} className='post-time' style={{color: "black", cursor: "pointer"}}>{show ? "Show less" : "Show more"}</p>
+            <>
+               {
+                  show ? comments.map(comment => (
+                    <Comments  key={comment.id} name={comment.userName} body={comment.body} />
+                 )) : ""
+               }
+            </>
         </div>
-        <form ref={formRef} onSubmit={handleSubmit} className="comment-wrapper">
-            <img src={IMAGES.smile} className="icon" alt=""/>
-            <input type="text" className="comment-box" placeholder="Add a comment"/>
-            <button className="comment-btn">post</button>
-        </form>
+        <Form  id={id}/>
     </div>
   )
 }
 
-export default Post
+export default memo(showComments(Post))

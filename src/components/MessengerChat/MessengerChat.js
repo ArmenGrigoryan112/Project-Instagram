@@ -1,21 +1,22 @@
+import { memo } from 'react';
+import { useSelector } from 'react-redux'
+import { selectConversations } from '../../store/slices/conversations/conversationsSlice'
 import './MessengerChat.css'
-import {useSelector} from "react-redux";
-import {selectUsers} from "../../store/slice/users/usersSlice";
-import {selectMessage} from "../../store/slice/message/messageSlice";
-import {all} from "axios";
 
 function MessengerChat() {
-    const {currentDialog,messageToUserId,currentUserId} = useSelector(selectMessage)
+  const {allMessages,toMessage,fromMessage} = useSelector(selectConversations)
   return (
 	 <div className='MessengerChat'>
-          {currentDialog.map(message => (
-            <div style={{display:'grid',justifyContent: message.fromId === currentUserId ? 'flex-end' : 'flex-start'}}>
-                <p className={(message.fromId === currentUserId && 'current') + ' message_type'}>{message.message}</p>
-                <span style={{textAlign: message.fromId === currentUserId ? 'right' : 'left', margin:message.fromId === currentUserId ?'0 15px 0  0':'0 0 0 15px'}}>{message.time}</span>
+        {allMessages.filter(message => (message.toUser === toMessage && message.fromUser === fromMessage) || (message.toUser === fromMessage && message.fromUser === toMessage)).map(message => (
+            <div key={allMessages.id} style={{display:'grid',justifyContent: message.fromUser === fromMessage? 'flex-end' : 'flex-start'}}>
+                <p className={(message.fromUser === fromMessage && 'current') + ' message_type'}>{message.message}</p>
+                <span style={{textAlign: message.fromUser === fromMessage ? 'right' : 'left', margin:message.fromUser === fromMessage ?'0 15px 0  0':'0 0 0 15px'}}>{message.time}</span>
             </div>
                 )) }
 	 </div>
   )
 }
 
-export default MessengerChat
+export default memo(MessengerChat)
+
+

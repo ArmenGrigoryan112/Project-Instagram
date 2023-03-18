@@ -1,9 +1,9 @@
 import './Notifications.css'
-import IMAGES from '../../images'
 import { useSelector } from 'react-redux'
 import NotificationItem from '../NotificationItem/NotificationItem'
+import { selectUsers } from '../../store/slices/users/usersSlice'
 function Notifications() {
-	const users = useSelector(state => state.users)
+	const {usersData} = useSelector(selectUsers)
   return (
 	 <div className='Notification'>
 		<div className='Notification-body'>
@@ -11,19 +11,19 @@ function Notifications() {
 			<div className='Notic-this'>
 				<h2>This Week</h2>
 				{
-					users.map(el => <NotificationItem key={el.id} img={IMAGES.cover1} name={el.name}/>)
+					usersData.map(el => <NotificationItem key={el.id} img={el.avatar} name={el.name}/>)
 				}
 			</div>
 			<div className='Notic-this'>
 				<h2>This Month</h2>
 				{
-					users.map(el => <NotificationItem key={el.id} img={IMAGES.cover1} name={el.name}/>)
+					usersData.map(el => <NotificationItem key={el.id} img={el.avatar} name={el.name}/>)
 				}
 			</div>
 			<div className='Notic-this'>
 				<h2>Earlier</h2>
 				{
-					users.map(el => <NotificationItem key={el.id} img={IMAGES.cover1} name={el.name}/>)
+					usersData.map(el => <NotificationItem key={el.id} img={el.avatar} name={el.name}/>)
 				}
 			</div>
 		</div>

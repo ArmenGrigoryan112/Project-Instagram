@@ -1,74 +1,81 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import './Login.css'
-import {useDispatch, useSelector} from "react-redux";
-import {login,selectUsers} from "../../store/slice/users/usersSlice";
-import {fetchUsers} from "../../store/slice/users/usersApi";
-import {useNavigate} from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux'
+import { logIn, selectUsers } from '../../store/slices/users/usersSlice'
+import { fetchUsers } from '../../store/slices/users/usersAPI'
+import { useNavigate } from 'react-router-dom'
+import IMAGES from '../../images'
 
 function Login() {
-    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {usersData,currentUser} = useSelector(selectUsers)
+    const {usersData, currentUser} = useSelector(selectUsers)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
+    useEffect(()=>{
         if (currentUser) {
             navigate('/')
         }
     },[currentUser])
 
-    useEffect(() => {
+    useEffect(()=>{
         if (!usersData.length) {
             dispatch(fetchUsers())
         }
+        
     },[])
 
-
     const validationSchema = yup.object().shape({
-        login: yup.string().typeError('Must be a string').required('Required field'),
-        password: yup.string().typeError('Must be a string').min(3, 'Very short password').required('Required field'),
-
+        email: yup.string().typeError('Must be a string').required('Required field'), 
+        password: yup.string().typeError('Must be a string').min(3, 'Very short password')
+       
     })
-    return (
-        <Formik
+  return (
+    <Formik 
+        initialValues={{
+            email: '',
+            password:''
+        }}
 
-            initialValues={{
-                login: 'bret',
-                password:'gwenborough'
-            }}
+        onSubmit={(value,{resetForm})=>{
+            dispatch(logIn(value))
+            resetForm()
+        }}
+        
+        validateOnBlur
 
-            onSubmit={(value,{resetForm})=>{
-                dispatch(login(value))
-                resetForm()
-            }}
-
-            validateOnBlur
-
-            validationSchema={validationSchema}
-
+        validationSchema={validationSchema}
+        
         >
-
-            {({values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty}) => (
-
+        
+        {({values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty}) => (
+        <div className='row'>
+            <div className='img'>
+                <img className='prof' width={300} src="https://images.squarespace-cdn.com/content/v1/54c45370e4b060a8975bb8f0/1580760425574-XL93VH4LD77UH8RVZ8KF/IMG_7948.jpg?format=1000w" alt="" />
+            </div>
+            <div className='side-row'>
+            <div className='form-row'>
+                <img  src={IMAGES.logo} width={200} alt=""/>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <h3>Login</h3>
-                    <input className='login-input' name={`login`} type={`text`}  placeholder="login" onChange={handleChange} onBlur={handleBlur} value={values.login} />
-                    {touched.login && errors.login && <p style={{color:'red'}}>{errors.login}</p>}
+                    <input className='login-input' name={`email`} type={`text`}  placeholder="email" onChange={handleChange} onBlur={handleBlur} value={values.email} />
+                        {touched.email && errors.email && <p style={{color:'red'}}>{errors.email}</p>} 
                     <br/><br/>
-                    <input name={`password`}className='login-input' type={`password`} placeholder="password" onBlur={handleBlur}  onChange={handleChange} value={values.password}/>
-                    {touched.password && errors.password && <p style={{color:'red'}}>{errors.password}</p>}
+                    <input name={`password`}className='login-input'  type={`password`} placeholder="password" onBlur={handleBlur}  onChange={handleChange} value={values.password} />
+                        {touched.password && errors.password && <p style={{color:'red'}}>{errors.password}</p>}
                     <br/><br/>
-                    <div className='flex_block'>
-                        <button  className='submit' type={'submit'}>Log In </button>
-                    <button type='button' className='submit'>Sign Up</button>
-                    </div>
+                    <button  className='submit' type={'submit'}>Log In </button>  
                 </form>
-
-            )}
-        </Formik>
-    )
+            </div>
+            <div className='signup'>
+                <p>Dont have an account? &nbsp; <span>Sign up</span></p>
+               
+            </div>
+            </div>
+        </div>
+        )}
+    </Formik>
+  )
 }
 
 export default Login
