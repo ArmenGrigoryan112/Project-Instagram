@@ -14,7 +14,7 @@ Features
 
 -Creating posts: You may add posts by using a link of an image and a description. The post will be added both in the profile and the main page.
 
--Profile page: The profile page not only has the username you are currently logged in, but also all the posts, like, comment and followers count which are all made up of randomized numbers. The posts count calculate the exact number of posts in the profile page. Each post can be deleted with by clicking on the red cross on top of the post in the profile page.
+-Profile page: The profile page not only has the username you are currently logged in, but also all the posts, likes, comments and followers count which are all made up of randomized numbers. The posts count calculate the exact number of posts in the profile page. Each post can be deleted by clicking on the white cross on top of the targeted post in the profile page.
 
 -Search bar: The search bar is made to find users by writing key-words and letters.
 
